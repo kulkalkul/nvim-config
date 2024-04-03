@@ -65,12 +65,6 @@ require("mason-lspconfig").setup()
 local servers = {
   rust_analyzer = {
     ["rust-analyzer"] = {
-      cargo = {
-        features = "all",
-      },
-      check = {
-        features = "all",
-      },
       procMacro = {
         ignored = {
           leptos_macro = {
