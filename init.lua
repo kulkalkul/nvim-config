@@ -18,6 +18,7 @@ require "setups/cmp"
 require "setups/fidget"
 require "setups/hop"
 require "setups/neogit"
+require "setups/todo-comments"
 
 -- features
 require "features/highlight-on-yank"
