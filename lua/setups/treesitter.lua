@@ -5,13 +5,13 @@ vim.defer_fn(function()
     ensure_installed = { "c", "cpp", "go", "lua", "python", "rust", "tsx", "javascript", "typescript", "vimdoc", "vim", "bash", "markdown", "wgsl" },
 
     auto_install = false,
-	sync_install = false,
-	ignore_install = {},
-	modules = {},
+    sync_install = false,
+    ignore_install = {},
+    modules = {},
 
     highlight = { enable = true },
     indent = { enable = false },
-	
+
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -21,7 +21,7 @@ vim.defer_fn(function()
         -- node_decremental = "<M-space>",
       },
     },
-	
+
     textobjects = {
       select = {
         enable = true,
@@ -68,3 +68,4 @@ vim.defer_fn(function()
     },
   }
 end, 0)
+
