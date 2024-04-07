@@ -18,18 +18,22 @@ local on_attach = function(_, bufnr)
   nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
   nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
   nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-  nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+  nmap("<leader>wf", function()
+    require("telescope.builtin").lsp_workspace_symbols { symbols = "function" }
+  end, "[W]orkspace [F]unctions")
+
+  nmap("<leader>ws", function()
+    require("telescope.builtin").lsp_workspace_symbols { symbols = "struct" }
+  end, "[W]orkspace [S]tructs")
+
+  nmap("<leader>wa", require("telescope.builtin").lsp_workspace_symbols, "[W]orkspace [A]ll Symbols")
 
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
   -- Lesser used LSP functionality
   nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-  nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
-  nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
-  nmap("<leader>wl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "[W]orkspace [L]ist Folders")
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
@@ -65,6 +69,14 @@ require("mason-lspconfig").setup()
 local servers = {
   rust_analyzer = {
     ["rust-analyzer"] = {
+      workspace = {
+        symbol = {
+          search = {
+            kind = "all_symbols",
+            limit = 2048,
+          }
+        }
+      },
       procMacro = {
         ignored = {
           leptos_macro = {
