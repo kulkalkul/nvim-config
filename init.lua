@@ -1,25 +1,24 @@
--- Must done before plugins are laoded
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- Must done before plugins are loaded
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- lazy
-require "lazy-bootstrap"
-require "lazy-plugins"
+vim.g.have_nerd_font = true
 
--- vim
-require "options"
-require "keymaps"
+-- TODO: Color scheme'i değiştir
+-- TODO: Rainbow yükle
+-- TODO: mini'yi yükleyip yüklememeyi kararlaştır
+-- TODO: Remove icons from todo
 
--- setups
-require "setups/telescope"
-require "setups/treesitter"
-require "setups/lsp"
-require "setups/cmp"
-require "setups/fidget"
-require "setups/hop"
-require "setups/neogit"
-require "setups/todo-comments"
+-- [[ Install `lazy.nvim` plugin manager ]]
+--    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+    vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+end ---@diagnostic disable-next-line: undefined-field
+vim.opt.rtp:prepend(lazypath)
 
--- features
-require "features/highlight-on-yank"
-require "features/transparency-adjustments"
+require("options")
+require("keymaps")
+
+require("lazy").setup("configs")
